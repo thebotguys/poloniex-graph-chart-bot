@@ -29,7 +29,7 @@ def parse_join(message):
                 req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
                 req = req.json()
                 chan = m['channel']['id']
-                message = 'You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
+                message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
                 resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
     elif (m['type'] == 'hello'):
         print '\033[91m HELLO RECEIVED \033[0m'
@@ -39,8 +39,8 @@ def parse_join(message):
             if 'help' in messageText:
                 req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
                 req = req.json()
-                chan = m['channel']['id']
-                message = 'You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
+                chan = m['channel']
+                message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
                 resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
 #    {
 #'text' : 'Here's your graph, sir.',
@@ -53,10 +53,6 @@ def parse_join(message):
 #        }
 #    ]
 #}
-        #DEBUG
-        #print '\033[91m' + 'HELLO SENT' + m['user']['id'] + '\033[0m'
-        #
-
 #Connects to Slacks and initiates socket handshake
 def start_rtm():
     r = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
