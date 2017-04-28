@@ -7,7 +7,6 @@ import os
 # Suppress InsecureRequestWarning
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-import logging;logging.basicConfig()
 
 ###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
 BOT_NAME = os.environ['BOT-NAME']
@@ -20,7 +19,7 @@ def parse_join(message):
     if (m['type'] == 'channel_joined'):
         req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
         req = req.json()
-        chan = req['channel']['id']
+        chan = m['channel']['id']
         message = 'Hello to everybody, looks like you need my help in this channel, what can I do for you?'
         resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
     elif (m['type'] == 'message'):
