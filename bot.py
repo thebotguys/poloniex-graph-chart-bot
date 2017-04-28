@@ -10,6 +10,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 ###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
 BOT_ID = os.environ['BOT-ID']
+BOT_NAME = os.environ['BOT-NAME']
 TOKEN = os.environ['SLACK-TOKEN']
 ###############################################################
 
@@ -30,7 +31,7 @@ def parse_join(message):
                     req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel'])
                     req = req.json()
                     chan = m['channel']
-                    message = '[TODO]You can ask me any graph by using @' + BOT_ID + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
+                    message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
                     resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
         except Exception as e:
             print e

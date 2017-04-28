@@ -17,6 +17,11 @@
       "value": "Your Bot's ID as it appeares in Slack",
       "required": "true"
     },
+    "BOT-NAME": {
+      "description": "Your Bot's Name as it appeares in Slack",
+      "value": "Your Bot's Name as it appeares in Slack",
+      "required": "true"
+    },
     "SLACK-TOKEN": {
       "description": "Your Slack API Token",
       "value": "1234-12314123123-123123123",
