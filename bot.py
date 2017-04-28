@@ -68,7 +68,7 @@ def on_close(ws):
     print '\033[91m'+"Connection Closed"+'\033[0m'
 
 def on_open(ws):
-    print "Connection Started - Auto Greeting new joiners to the network"
+    print "Connection Started"
 
 
 if __name__ == "__main__":
