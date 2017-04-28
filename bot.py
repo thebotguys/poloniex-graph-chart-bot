@@ -16,7 +16,7 @@ TOKEN = os.environ['SLACK-TOKEN']
 
 def parse_join(message):
     m = json.loads(message)
-    print '\033[91m' + m + '\033[0m'
+    print '\033[91m' + str(m) + '\033[0m'
     if (m['type'] == 'channel_joined'):
         req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
         req = req.json()
