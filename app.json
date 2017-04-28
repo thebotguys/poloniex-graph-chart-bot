@@ -1,0 +1,26 @@
+{
+  "name": "CryptoChartsSlackBot",
+  "description": "This app connects to your slack team and provides charts as images from poloniex exchange",
+  "keywords": [
+    "productivity",
+    "finance",
+    "crytocurrency",
+    "bitcoin",
+    "Slack",
+    "bot"
+  ],
+  "website": "https://github.com/AlessandroSanino1994/cryptocharts-slack-bot",
+  "repository": "https://github.com/AlessandroSanino1994/cryptocharts-slack-bot",
+  "env": {
+    "BOT_NAME": {
+      "description": "Your Bot's name as it appeares in Slack",
+      "value": "Your Bot's name as it appeares in Slack",
+      "required": "true"
+    },
+    "SLACK-TOKEN": {
+      "description": "Your Slack API Token",
+      "value": "1234-12314123123-123123123",
+      "required": "true"
+    }
+  }
+}
