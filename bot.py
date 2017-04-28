@@ -22,7 +22,7 @@ def parse_join(message):
         chan = m['channel']['id']
         message = 'Hello to everybody, looks like you need my help in this channel, what can I do for you?'
         resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
-    elif (m['type'] == 'message'):
+    elif (m['type'] == 'message') and m['user'] != BOT_ID:
         messageText = m['text']
         if '@' + BOT_ID in messageText: #message for me
             if 'help' in messageText:
