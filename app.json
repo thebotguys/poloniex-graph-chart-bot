@@ -12,9 +12,9 @@
   "website": "https://github.com/AlessandroSanino1994/cryptocharts-slack-bot",
   "repository": "https://github.com/AlessandroSanino1994/cryptocharts-slack-bot",
   "env": {
-    "BOT_NAME": {
-      "description": "Your Bot's name as it appeares in Slack",
-      "value": "Your Bot's name as it appeares in Slack",
+    "BOT-ID": {
+      "description": "Your Bot's ID as it appeares in Slack",
+      "value": "Your Bot's ID as it appeares in Slack",
       "required": "true"
     },
     "SLACK-TOKEN": {
