@@ -13,7 +13,7 @@ try:
     BOT_NAME = os.environ['BOT-NAME']
     TOKEN = os.environ['SLACK-TOKEN']
 except:
-	TOKEN = 'Manually set the API Token if you\'re not running through heroku or have not set vars in ENV'
+    TOKEN = 'Manually set the API Token if you\'re not running through heroku or have not set vars in ENV'
     BOT_NAME = 'Manually set bot name here if you\'re not running through heroku or have not set vars in ENV'
 ###############################################################
 
