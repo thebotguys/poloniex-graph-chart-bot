@@ -34,6 +34,7 @@ def parse_join(message):
     elif (m['type'] == 'hello'):
         print '\033[91m HELLO RECEIVED \033[0m'
     elif (m['type'] == 'desktop_notification'):
+        messageText = m['content']
         if '@' + BOT_NAME in messageText: #message for me
             if 'help' in messageText:
                 req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
