@@ -23,14 +23,17 @@ def parse_join(message):
         message = 'Hello to everybody, looks like you need my help in this channel, what can I do for you?'
         resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
     elif (m['type'] == 'message') and m['user'] != BOT_ID:
-        messageText = m['text']
-        if '@' + BOT_ID in messageText: #message for me
-            if 'help' in messageText:
-                req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel'])
-                req = req.json()
-                chan = m['channel']
-                message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
-                resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
+        try:
+            messageText = m['text']
+            if '@' + BOT_ID in messageText: #message for me
+                if 'help' in messageText:
+                    req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel'])
+                    req = req.json()
+                    chan = m['channel']
+                    message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
+                    resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
+        except Exception as e:
+            print e
     elif (m['type'] == 'hello'):
         print '\033[91m HELLO RECEIVED \033[0m'
 
