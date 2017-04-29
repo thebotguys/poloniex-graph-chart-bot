@@ -21,7 +21,7 @@ def parse_join(message):
         #print '\033[91m' + str(m) + '\033[0m'
         if (received_message['type'] == 'channel_joined'):
                 print '\033[91m I JOINED A CHANNEL \033[0m'
-            #try:
+            try:
                 chan = received_message['channel']['id']
                 req = rtm_open_channel()
                 params = {
@@ -32,8 +32,8 @@ def parse_join(message):
                   'as_user' : 'true'
                 }
                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-            #except Exception as ex:
-            #    print ex
+            except Exception as ex:
+                print ex
         elif (received_message['type'] == 'message') and received_message['user'] != BOT_ID:
                 print '\033[91m MESSAGE RECEIVED \033[0m'
             #try:
