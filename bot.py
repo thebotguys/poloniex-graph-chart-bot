@@ -16,12 +16,12 @@ TOKEN = os.environ['SLACK-TOKEN']
 
 def parse_join(message):
     """Parses a received message and does actions based on the type of the message."""
-    try:
+    #try:
         receivedMessage = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
         if (receivedMessage['type'] == 'channel_joined'):
             print '\033[91m I JOINED A CHANNEL \033[0m'
-            try:
+            #try:
                 chan = receivedMessage['channel']['id']
                 req = rtm_open_channel()
                 params = {
@@ -32,11 +32,11 @@ def parse_join(message):
                   'as_user' : 'true'
                 }
                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-            except Exception as ex:
-                print ex
+            #except Exception as ex:
+            #    print ex
         elif (receivedMessage['type'] == 'message') and receivedMessage['user'] != BOT_ID:
             print '\033[91m MESSAGE RECEIVED \033[0m'
-            try:
+            #try:
                 receivedText = receivedMessage['text']
                 chan = receivedMessage['channel']
                 if '@' + BOT_ID in receivedText: #message for me
@@ -56,7 +56,7 @@ def parse_join(message):
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                         print '\033[91m HELP MESSAGE POSTED \033[0m'
                     elif 'graph' in receivedText:
-                        try:
+                        #try:
                             message_args = receivedText.split(' ')
                             params = {
                               'channel' : chan,
@@ -101,16 +101,24 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
-                                    print str(params)
+                                    params2 = {
+                                      'channel' : chan,
+                                      'token' : TOKEN,
+                                      'text' : '/coincap -o ' + coin1.upper() + ' ' + coin2.upper(),
+                                      'parse' : 'full',
+                                      'as_user' : 'true'
+                                    }
+                                    resp = requests.post('https://slack.com/api/chat.postMessage', params=params2)
+                                    #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
                                     params['text'] = response_text
                                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                        except Exception as ex:
-                            print ex
+                        #except Exception as ex:
+                            #print ex
                     elif 'thank you' in receivedText or 'thanks' in receivedText:
-                        try:
+                        #try:
                             req = rtm_open_channel(channel=chan)
                             params = {
                               'channel' : chan,
@@ -121,10 +129,10 @@ def parse_join(message):
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                             print '\033[91m YOU\'RE WELCOME MESSAGE POSTED \033[0m'
-                        except Exception as ex:
-                            print ex
+                        #except Exception as ex:
+                        #    print ex
                     else:
-                        try:
+                        #try:
                             req = rtm_open_channel(channel=chan)
                             params = {
                               'channel' : chan,
@@ -135,15 +143,15 @@ def parse_join(message):
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                             print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
-                        except Exception as ex:
-                            print ex
-            except Exception as ex:
-                print ex
+                        #except Exception as ex:
+                        #    print ex
+            #except Exception as ex:
+            #    print ex
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else: pass
-    except Exception as ex:
-        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n Error :' + ex + ' \033[0m'
+    #except Exception as ex:
+    #    print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n Error :' + ex + ' \033[0m'
 
 def start_rtm():
     """Connects to Slacks and initiates socket handshake, returns a websocket"""
