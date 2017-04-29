@@ -41,7 +41,11 @@ def parse_join(message):
                     params = {
                       'channel' : chan,
                       'token' : TOKEN,
-                      'text' : '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. \nAnd of course sir. COIN1 and COIN2 are coins',
+                      'text' : '[TODO]You can ask me any graph by using \n '+
+                               '`@' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME]`\n'+
+                               'where `TIME` is 24h, 7d, 30d, 1y. \n' +
+                               'And of course sir. `COIN1` and `COIN2` are coins\n' +
+                               'Example of call may be `@' + BOT_NAME + ' graph ARK USD 24h`',
                       'parse' : 'full',
                       'as_user' : 'true'
                     }
