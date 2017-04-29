@@ -101,8 +101,6 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
-                                    params['text'] = '/coincap -o ' + coin1.upper() + ' ' + coin2.upper()
-                                    #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
