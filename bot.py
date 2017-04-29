@@ -117,10 +117,9 @@ def parse_join(message):
               'as_user' : 'true'
             }
             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-            print '\033[91m THANK YOU MESSAGE POSTED \033[0m'
+            print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
     except Exception as ex:
-        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
-               Error :' + ex + ' \033[0m'
+        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n Error :' + ex + ' \033[0m'
 #    {
 #'text' : 'Here's your graph, sir.',
 #    'attachments': [
