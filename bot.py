@@ -108,6 +108,7 @@ def parse_join(message):
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:
+            chan = receivedMessage['channel']
             try:
                 req = rtm_open_channel(channel=chan)
                 params = {
