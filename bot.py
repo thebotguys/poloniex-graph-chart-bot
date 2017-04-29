@@ -72,7 +72,7 @@ def parse_join(message):
 def start_rtm():
     """Connects to Slacks and initiates socket handshake, returns a websocket"""
     req = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
-    req = r.json()
+    req = req.json()
     websocket_url = req['url']
     return websocket_url
 
