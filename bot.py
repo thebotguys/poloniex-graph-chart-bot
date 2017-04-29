@@ -58,8 +58,8 @@ def parse_join(message):
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
-                          'text' : None,
                           'attachments' : None,
+                          'parse' : 'full',
                           'as_user' : 'true'
                         }
                         coin1 = message_args[2].lower()
@@ -90,6 +90,7 @@ def parse_join(message):
                                 title += ' graph'
                                 params['attachments'] = [
                                     {
+                                        'pretext' : response_text
                                         'fallback': '',
                                         'color': '#36a64f',
                                         'title': title,
@@ -101,7 +102,7 @@ def parse_join(message):
                             else:
                                 response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n'
                                 response_text += 'Please have in mind that I get data from Poloniex archives.'
-                            params['text'] = response_text
+                                params['text'] = response_text
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                     except Exception as ex:
                         print ex
