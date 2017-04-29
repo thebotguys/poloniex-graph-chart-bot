@@ -49,7 +49,8 @@ def parse_join(message):
                                    '`@' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME]`\n'+
                                    'where `TIME` is 24h, 7d, 30d, 1y. \n' +
                                    'And of course sir. `COIN1` and `COIN2` are coins\n' +
-                                   'Example of call may be `@' + BOT_NAME + ' graph ARK USD 24h`',
+                                   'Example of call may be `@' + BOT_NAME + ' graph ARK USD 24h` \n' +
+                                   '_Sources from : Cryptonator, Cryptohistory (Graphs) and Poloniex_',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
@@ -84,8 +85,7 @@ def parse_join(message):
                                         resp = resp.json()
                                         print '\033[91m ' + str(resp) + ' \033[0m'
                                         response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
-                                        response_text += '\nCurrent Volume (24 Hours only) of ' + resp['ticker']['volume'] + ' ' + coin2.upper()
-                                        response_text += '\n~From Cryptonator Archives'
+                                        response_text += '\nCurrent Volume of the last 24 hours is ' + resp['ticker']['volume'] + ' ' + coin1.upper()
                                     else:
                                         response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
                                     title = coin1.upper() + ' - ' + coin2.upper() + ' '
