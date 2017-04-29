@@ -80,7 +80,7 @@ def parse_join(message):
                                 resp = requests.get(url)
                                 if resp.status_code == requests.codes.ok:
                                     resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
-                                    if(resp.code == requests.codes.ok):
+                                    if(resp.status_code == requests.codes.ok):
                                         resp = resp.json()
                                         print '\033[91m ' + str(resp) + ' \033[0m'
                                         response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
