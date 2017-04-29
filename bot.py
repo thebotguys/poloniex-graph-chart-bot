@@ -15,6 +15,7 @@ TOKEN = os.environ['SLACK-TOKEN']
 ###############################################################
 
 def parse_join(message):
+    """Parses a received message and does actions based on the type of the message."""
     try:
         receivedMessage = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
@@ -68,14 +69,15 @@ def parse_join(message):
 #        }
 #    ]
 #}
-#Connects to Slacks and initiates socket handshake
 def start_rtm():
+    """Connects to Slacks and initiates socket handshake, returns a websocket"""
     r = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
     r = r.json()
     r = r['url']
     return r
 
 def rtm_open_channel(channel):
+    """Connects to Slacks and opens specified channel"""
     params = {
        'token' : TOKEN,
        'channel' : channel,
