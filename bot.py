@@ -59,6 +59,7 @@ def parse_join(message):
                           'channel' : chan,
                           'token' : TOKEN,
                           'text' : None,
+                          'attachments' : None,
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
