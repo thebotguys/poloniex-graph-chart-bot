@@ -11,17 +11,6 @@ Link to it's repository : https://github.com/orliesaurus/greetingslack. Again, t
 Python 2.7+
 Edit `bot.py` on lines 7-8 to customise with your greeting and token
 
-#Installation
-```bash
-git clone <thisgitrepo>
-cd <thisgitrepo>
-virtualenv greetingslack
-. greetingslack/bin/activate
-pip install requests
-pip install websocket-client
-python bot.py &
-```
-
 #Heroku
 Deploy with a click supported now
 
@@ -30,5 +19,5 @@ Deploy with a click supported now
 Don't forget to scale your worker to 1.
 
 If you want to donate and support my work:<br>
-BTC : 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3
+BTC : 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3<br>
 Paypal : https://paypal.me/AlessandroSanino
