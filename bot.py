@@ -110,6 +110,7 @@ def parse_join(message):
                                       'as_user' : 'true'
                                     }
                                     resp = requests.post('https://slack.com/api/chat.command', params=params2)
+                                    print str(resp.json())
                                     #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
