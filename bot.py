@@ -101,9 +101,9 @@ def parse_join(message):
                                 response_text += 'Please have in mind that I get data from Poloniex archives.'
                             params['text'] = response_text
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                        except Exception as ex:
-                            print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
-                                   Error :' + ex + ' \033[0m'
+                    except Exception as ex:
+                        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
+                               Error :' + ex + ' \033[0m'
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:pass
