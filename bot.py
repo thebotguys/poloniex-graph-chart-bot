@@ -42,10 +42,10 @@ def parse_join(message):
                     params = {
                       'channel' : chan,
                       'token' : TOKEN,
-                      'text' : urllib.quote('[TODO]You can ask me any graph by using @' + BOT_NAME +
-                                            ' graph [COIN1] [COIN2] [TIME], \
-                                            where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 \
-                                            and COIN2 are coins'),
+                      'text' : '[TODO]You can ask me any graph by using @' + BOT_NAME +
+                               ' graph [COIN1] [COIN2] [TIME], \
+                                 where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 \
+                                 and COIN2 are coins',
                       'parse' : 'full',
                       'as_user' : 'true'
                     }
