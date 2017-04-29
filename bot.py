@@ -94,7 +94,8 @@ def parse_join(message):
                                         'fallback': '',
                                         'color': '#36a64f',
                                         'title': title,
-                                        'image_url': url
+                                        'image_url': url,
+                                        'thumb_url': url
                                     }
                                 ]
                             else:
