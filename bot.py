@@ -60,7 +60,6 @@ def parse_join(message):
                           'token' : TOKEN,
                           'text' : None,
                           'attachments' : None,
-                          'parse' : 'full',
                           'as_user' : 'true'
                         }
                         coin1 = message_args[2].lower()
