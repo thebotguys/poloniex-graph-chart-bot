@@ -98,6 +98,7 @@ def parse_join(message):
                                         'thumb_url': url
                                     }
                                 ]
+                                print str(params)
                             else:
                                 response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n'
                                 response_text += 'Please have in mind that I get data from Poloniex archives.'
