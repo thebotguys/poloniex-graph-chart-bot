@@ -108,16 +108,19 @@ def parse_join(message):
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:
-            req = rtm_open_channel(channel=chan)
-            params = {
-              'channel' : chan,
-              'token' : TOKEN,
-              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n `@' + BOT_NAME + ' help`',
-              'parse' : 'full',
-              'as_user' : 'true'
-            }
-            resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-            print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
+            try:
+                req = rtm_open_channel(channel=chan)
+                params = {
+                  'channel' : chan,
+                  'token' : TOKEN,
+                  'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n `@' + BOT_NAME + ' help`',
+                  'parse' : 'full',
+                  'as_user' : 'true'
+                }
+                resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
+            except Exception as ex:
+                print ex
     except Exception as ex:
         print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n Error :' + ex + ' \033[0m'
 #    {
