@@ -71,10 +71,10 @@ def parse_join(message):
 #}
 def start_rtm():
     """Connects to Slacks and initiates socket handshake, returns a websocket"""
-    r = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
-    r = r.json()
-    r = r['url']
-    return r
+    req = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
+    req = r.json()
+    websocket_url = req['url']
+    return websocket_url
 
 def rtm_open_channel(channel):
     """Connects to Slacks and opens specified channel"""
@@ -84,7 +84,7 @@ def rtm_open_channel(channel):
     }
     req = requests.get('https://slack.com/api/im.open', params=params)
     req = req.json()
-    return r
+    return req
 
 def on_message(ws, message):
     parse_join(message)
