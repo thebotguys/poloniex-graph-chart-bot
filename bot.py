@@ -90,7 +90,7 @@ def parse_join(message):
                                 title += ' graph'
                                 params['attachments'] = [
                                     {
-                                        'pretext' : response_text
+                                        'pretext' : response_text,
                                         'fallback': '',
                                         'color': '#36a64f',
                                         'title': title,
