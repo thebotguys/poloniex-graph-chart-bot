@@ -73,6 +73,7 @@ def parse_join(message):
                                 response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.'
                                 response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                             else: #tries to get image
+                              try:
                                 #building url
                                 url = 'https://cryptohistory.org/charts/candlestick/'
                                 url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
@@ -115,6 +116,8 @@ def parse_join(message):
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
                                     params['text'] = response_text
                                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                            except Exception as ex:
+                                print ex
                         #except Exception as ex:
                             #print ex
                     elif 'thank you' in receivedText or 'thanks' in receivedText:
