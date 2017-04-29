@@ -101,14 +101,7 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
-                                    params2 = {
-                                      'channel' : chan,
-                                      'token' : TOKEN,
-                                      'text' : '/coincap -o ' + coin1.upper() + ' ' + coin2.upper(),
-                                      'parse' : 'full',
-                                      'as_user' : 'true'
-                                    }
-                                    resp = requests.post('https://slack.com/api/chat.postMessage', params=params2)
+                                    params['text'] = '/coincap -o ' + coin1.upper() + ' ' + coin2.upper()
                                     #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
