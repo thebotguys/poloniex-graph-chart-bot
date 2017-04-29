@@ -74,14 +74,17 @@ def parse_join(message):
                                 response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                             else: #tries to get image
                                 #building url
-                                resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
-                                if(resp.code == requests.codes.ok):
-                                    response_text += '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
                                 url = 'https://cryptohistory.org/charts/candlestick/'
                                 url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
                                 resp = requests.get(url)
                                 if resp.status_code == requests.codes.ok:
-                                    response_text = "Here you are, sir."
+                                    resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
+                                    if(resp.code == requests.codes.ok):
+                                        resp = resp.json()
+                                        response_text = '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper() + /
+                                        'with a current Volume of ' + resp['ticker']['volume'] + ' ' + coin2.upper()
+                                    else:
+                                        response_text = 'Current Price and Volume are not available, but I have the graph, sir.''
                                     title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                     if (timeframe == '24h'):
                                         title += '24 Hours'
