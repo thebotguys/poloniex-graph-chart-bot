@@ -74,7 +74,7 @@ def parse_join(message):
                             url = 'https://cryptohistory.org/charts/candlestick/'
                             url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
                             resp = requests.get(url)
-                            if resp.status_code == requests.code.ok:
+                            if resp.status_code == requests.codes.ok:
                                 response_text = "Here you are, sir."
                                 title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                 if (timeframe == '24h'):
