@@ -85,7 +85,7 @@ def parse_join(message):
                                         response_text += '\nCurrent Volume (24 Hours only) of ' + resp['ticker']['volume'] + ' ' + coin2.upper()
                                         response_text += '\n~From Cryptonator Archives'
                                     else:
-                                        response_text = 'Current Price and Volume are not available, but I have the graph, sir.''
+                                        response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
                                     title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                     if (timeframe == '24h'):
                                         title += '24 Hours'
