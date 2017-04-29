@@ -98,6 +98,7 @@ def parse_join(message):
                         else:
                             response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n' +
                                             'Please have in mind that I get data from Poloniex archives.'
+                        params['text'] = response_text
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
