@@ -116,7 +116,7 @@ def parse_join(message):
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
                                     params['text'] = response_text
                                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                            except Exception as ex:
+                              except Exception as ex:
                                 print ex
                         #except Exception as ex:
                             #print ex
