@@ -102,8 +102,7 @@ def parse_join(message):
                             params['text'] = response_text
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                     except Exception as ex:
-                        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
-                               Error :' + ex + ' \033[0m'
+                        print ex
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:pass
