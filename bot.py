@@ -15,7 +15,7 @@ TOKEN = os.environ['SLACK-TOKEN']
 ###############################################################
 
 def parse_join(message):
-    """Parses a received message and does actions based on the type of the message."""
+        """Parses a received message and does actions based on the type of the message."""
     #try:
         receivedMessage = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
