@@ -66,8 +66,8 @@ def parse_join(message):
                     timeframe = args[4].lower()
 
                     if not timeframe in ['24h', '7d', '30d', '1y']:
-                        response_text = 'Invalid time frame sir, the available options are : [24h, 7d, 30d, 1y]\n' +
-                                        'Please ask me more by typing `@' + BOT_NAME + ' help`'
+                        response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.'
+                        response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                     else: #tries to get image
                         #building url
                         url = 'https://cryptohistory.org/charts/candlestick/' +
