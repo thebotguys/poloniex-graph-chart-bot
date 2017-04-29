@@ -70,8 +70,8 @@ def parse_join(message):
                         response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                     else: #tries to get image
                         #building url
-                        url = 'https://cryptohistory.org/charts/candlestick/' +
-                              coin1 + '-' + coin2 + '/' + timeframe + '/png'
+                        url = 'https://cryptohistory.org/charts/candlestick/'
+                        url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
                         resp = requests.get(url)
                         if resp.status_code == requests.code.ok:
                             response_text = "Here you are, sir."
