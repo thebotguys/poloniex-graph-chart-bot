@@ -20,7 +20,7 @@ def parse_join(message):
         receivedMessage = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
         if (receivedMessage['type'] == 'channel_joined'):
-            print '\033[91m I JOINED A CHANNEL \033[0m'
+                print '\033[91m I JOINED A CHANNEL \033[0m'
             #try:
                 chan = receivedMessage['channel']['id']
                 req = rtm_open_channel()
@@ -35,7 +35,7 @@ def parse_join(message):
             #except Exception as ex:
             #    print ex
         elif (receivedMessage['type'] == 'message') and receivedMessage['user'] != BOT_ID:
-            print '\033[91m MESSAGE RECEIVED \033[0m'
+                print '\033[91m MESSAGE RECEIVED \033[0m'
             #try:
                 receivedText = receivedMessage['text']
                 chan = receivedMessage['channel']
