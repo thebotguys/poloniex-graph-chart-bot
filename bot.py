@@ -101,7 +101,7 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
-                                    params['text'] = {
+                                    params2 = {
                                       'channel' : chan,
                                       'token' : TOKEN,
                                       'command' : '/coincap',
