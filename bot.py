@@ -91,7 +91,7 @@ def parse_join(message):
                                 params['attachments'] = [
                                     {
                                         'pretext' : response_text,
-                                        'fallback': '',
+                                        'fallback': 'Crypto Graph',
                                         'color': '#36a64f',
                                         'title': title,
                                         'image_url': url,
