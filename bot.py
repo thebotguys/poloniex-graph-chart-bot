@@ -124,17 +124,7 @@ def parse_join(message):
                 print ex
     except Exception as ex:
         print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n Error :' + ex + ' \033[0m'
-#    {
-#'text' : 'Here's your graph, sir.',
-#    'attachments': [
-#        {
-#            'fallback': '',
-#            'color': '#36a64f',
-#            'title': 'DASH-USDT Chart - 7 Days',
-#            'image_url': 'https://cryptohistory.org/charts/candlestick/dash-usdt/7d/png'
-#        }
-#    ]
-#}
+        
 def start_rtm():
     """Connects to Slacks and initiates socket handshake, returns a websocket"""
     req = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
