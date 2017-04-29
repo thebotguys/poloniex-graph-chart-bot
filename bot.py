@@ -50,7 +50,11 @@ def parse_join(message):
                                    'where `TIME` is 24h, 7d, 30d, 1y. \n' +
                                    'And of course sir. `COIN1` and `COIN2` are coins\n' +
                                    'Example of call may be `@' + BOT_NAME + ' graph ARK USD 24h` \n' +
-                                   '_Sources from : Cryptonator, Cryptohistory (Graphs) and Poloniex_',
+                                   '_Sources from : Cryptonator, Cryptohistory (Graphs) and Poloniex_\n' +
+                                   '*Project Repository on Github.com :* https://github.com/AlessandroSanino1994/cryptocharts-slack-bot \n' +
+                                   'Support my creator : Pay his pizzas and coffee\n' +
+                                   '*Paypal :* https://paypal.me/AlessandroSanino \n' +
+                                   '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
