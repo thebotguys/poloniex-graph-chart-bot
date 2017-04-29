@@ -88,7 +88,7 @@ def parse_join(message):
                                 else:
                                     title += 'Invalid Timeframe [please contact my developer to fix this]'
                                 title += ' graph'
-                                params['attachments'] = [
+                                params['attachments'] = json.dumps([
                                     {
                                         'pretext' : response_text,
                                         'fallback': 'Crypto Graph',
@@ -97,7 +97,7 @@ def parse_join(message):
                                         'image_url': url,
                                         'thumb_url': url
                                     }
-                                ]
+                                ])
                                 print str(params)
                             else:
                                 response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n'
