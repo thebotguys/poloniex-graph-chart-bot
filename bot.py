@@ -33,25 +33,25 @@ def parse_join(message):
             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
         elif (receivedMessage['type'] == 'message') and receivedMessage['user'] != BOT_ID:
             print '\033[91m MESSAGE RECEIVED \033[0m'
-                receivedText = receivedMessage['text']
-                chan = receivedMessage['channel']
-                if '@' + BOT_ID in receivedText: #message for me
-                    #TODO parse message
-                    if 'help' in receivedText:
-                        req = rtm_open_channel(channel=chan)
-                        params = {
-                          'channel' : chan,
-                          'token' : TOKEN,
-                          'text' : urllib.quote('[TODO]You can ask me any graph by using @' + BOT_NAME +
-                                                ' graph [COIN1] [COIN2] [TIME], \
-                                                where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 \
-                                                and COIN2 are coins'),
-                          'parse' : 'full',
-                          'as_user' : 'true'
-                        }
-                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                        print '\033[91m HELP MESSAGE POSTED \033[0m'
-        elif (receivedMessage['type'] == 'hello'):
+            receivedText = receivedMessage['text']
+            chan = receivedMessage['channel']
+            if '@' + BOT_ID in receivedText: #message for me
+                #TODO parse message
+                if 'help' in receivedText:
+                    req = rtm_open_channel(channel=chan)
+                    params = {
+                      'channel' : chan,
+                      'token' : TOKEN,
+                      'text' : urllib.quote('[TODO]You can ask me any graph by using @' + BOT_NAME +
+                                            ' graph [COIN1] [COIN2] [TIME], \
+                                            where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 \
+                                            and COIN2 are coins'),
+                      'parse' : 'full',
+                      'as_user' : 'true'
+                    }
+                    resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                    print '\033[91m HELP MESSAGE POSTED \033[0m'
+        elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:pass
     except Exception as ex:
