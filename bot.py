@@ -101,6 +101,16 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
+                                    params['text'] = {
+                                      'channel' : chan,
+                                      'token' : TOKEN,
+                                      'command' : '/coincap',
+                                      'text' : '-o ' + coin1.upper() + ' ' + coin2.upper(),
+                                      'parse' : 'full',
+                                      'as_user' : 'true'
+                                    }
+                                    resp = requests.post('https://slack.com/api/chat.command', params=params2)
+                                    #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
