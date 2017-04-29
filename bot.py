@@ -81,8 +81,9 @@ def parse_join(message):
                                     resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
                                     if(resp.code == requests.codes.ok):
                                         resp = resp.json()
-                                        response_text = '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper() + /
-                                        'with a current Volume of ' + resp['ticker']['volume'] + ' ' + coin2.upper()
+                                        response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
+                                        response_text += '\nCurrent Volume (24 Hours only) of ' + resp['ticker']['volume'] + ' ' + coin2.upper()
+                                        response_text += '\n~From Cryptonator Archives'
                                     else:
                                         response_text = 'Current Price and Volume are not available, but I have the graph, sir.''
                                     title = coin1.upper() + ' - ' + coin2.upper() + ' '
