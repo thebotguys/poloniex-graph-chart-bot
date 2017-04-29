@@ -36,18 +36,6 @@ def parse_join(message):
             receivedText = receivedMessage['text']
             chan = receivedMessage['channel']
             if '@' + BOT_ID in receivedText: #message for me
-                #TODO parse message
-                if 'thank you' in receivedText:
-                    req = rtm_open_channel(channel=chan)
-                    params = {
-                      'channel' : chan,
-                      'token' : TOKEN,
-                      'text' : 'My pleasure, sir. :). At your service.',
-                      'parse' : 'full',
-                      'as_user' : 'true'
-                    }
-                    resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                    print '\033[91m THANK YOU MESSAGE POSTED \033[0m'
                 if 'help' in receivedText:
                     req = rtm_open_channel(channel=chan)
                     params = {
