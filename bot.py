@@ -54,7 +54,7 @@ def parse_join(message):
                     print '\033[91m HELP MESSAGE POSTED \033[0m'
                 elif 'graph' in receivedText:
                     try:
-                        args = receivedText.split(' ')
+                        message_args = receivedText.split(' ')
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
@@ -62,9 +62,9 @@ def parse_join(message):
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
-                        coin1 = args[2].lower()
-                        coin2 = args[3].lower()
-                        timeframe = args[4].lower()
+                        coin1 = message_args[2].lower()
+                        coin2 = message_args[3].lower()
+                        timeframe = message_args[4].lower()
 
                         if not timeframe in ['24h', '7d', '30d', '1y']:
                             response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.'
