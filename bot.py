@@ -103,10 +103,24 @@ def parse_join(message):
                                     ])
                                     print str(params)
                                 else:
-                                    response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n'
+                                    response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
                                     response_text += 'Please have in mind that I get data from Poloniex archives.'
                                     params['text'] = response_text
                                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        except Exception as ex:
+                            print ex
+                    elif 'thank you' in receivedText or 'thanks' in receivedText:
+                        try:
+                            req = rtm_open_channel(channel=chan)
+                            params = {
+                              'channel' : chan,
+                              'token' : TOKEN,
+                              'text' : 'You\'re welcome sir. It\'s a pleasure to me to be helpful. :)',
+                              'parse' : 'full',
+                              'as_user' : 'true'
+                            }
+                            resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                            print '\033[91m YOU\'RE WELCOME MESSAGE POSTED \033[0m'
                         except Exception as ex:
                             print ex
                     else:
