@@ -74,6 +74,9 @@ def parse_join(message):
                                 response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                             else: #tries to get image
                                 #building url
+                                resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
+                                if(resp.code == requests.codes.ok):
+                                    response_text += '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
                                 url = 'https://cryptohistory.org/charts/candlestick/'
                                 url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
                                 resp = requests.get(url)
@@ -101,16 +104,6 @@ def parse_join(message):
                                             'thumb_url': url
                                         }
                                     ])
-                                    params2 = {
-                                      'channel' : chan,
-                                      'token' : TOKEN,
-                                      'command' : '/coincap',
-                                      'text' : '-o ' + coin1.upper() + ' ' + coin2.upper(),
-                                      'parse' : 'full',
-                                      'as_user' : 'true'
-                                    }
-                                    resp = requests.post('https://slack.com/api/chat.command', params=params2)
-                                    print str(resp.json())
                                     #print str(params)
                                 else:
                                     response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
