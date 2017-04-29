@@ -78,11 +78,11 @@ def parse_join(message):
                             title = coin1.upper() + ' - ' + coin2.upper() + ' '
                             if (timeframe == '24h'):
                                 title += '24 Hours'
-                            elif (timeframe == '7d')
+                            elif (timeframe == '7d'):
                                 title += '7 Days'
-                            elif (timeframe == '30d')
+                            elif (timeframe == '30d'):
                                 title += '30 Days'
-                            elif (timeframe == '7d')
+                            elif (timeframe == '7d'):
                                 title += '1 Year'
                             else:
                                 title += 'Invalid Timeframe [please contact my developer to fix this]'
