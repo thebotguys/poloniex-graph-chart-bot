@@ -52,6 +52,53 @@ def parse_join(message):
                     }
                     resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                     print '\033[91m HELP MESSAGE POSTED \033[0m'
+                elif 'graph' in receivedText:
+                    args = receivedText.split(' ')
+                    params = {
+                      'channel' : chan,
+                      'token' : TOKEN,
+                      'text' : None,
+                      'parse' : 'full',
+                      'as_user' : 'true'
+                    }
+                    coin1 = args[2].lower()
+                    coin2 = args[3].lower()
+                    timeframe = args[4].lower()
+
+                    if not timeframe in ['24h', '7d', '30d', '1y']:
+                        response_text = 'Invalid time frame sir, the available options are : [24h, 7d, 30d, 1y]\n' +
+                                        'Please ask me more by typing `@' + BOT_NAME + ' help`'
+                    else: #tries to get image
+                        #building url
+                        url = 'https://cryptohistory.org/charts/candlestick/' +
+                              coin1 + '-' + coin2 + '/' + timeframe + '/png'
+                        resp = requests.get(url)
+                        if resp.status_code == requests.code.ok:
+                            response_text = "Here you are, sir."
+                            title = coin1.upper() + ' - ' + coin2.upper() + ' '
+                            if (timeframe == '24h'):
+                                title += '24 Hours'
+                            elif (timeframe == '7d')
+                                title += '7 Days'
+                            elif (timeframe == '30d')
+                                title += '30 Days'
+                            elif (timeframe == '7d')
+                                title += '1 Year'
+                            else:
+                                title += 'Invalid Timeframe [please contact my developer to fix this]'
+                            title += ' graph'
+                            params['attachments'] = [
+                                {
+                                    'fallback': '',
+                                    'color': '#36a64f',
+                                    'title': title
+                                    'image_url': url
+                                }
+                            ]
+                        else:
+                            response_text = 'Sorry sir., but I can\'t find the coin pair you are asking for.\n' +
+                                            'Please have in mind that I get data from Poloniex archives.'
+                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
         else:pass
