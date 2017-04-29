@@ -20,10 +20,10 @@ def parse_join(message):
         received_message = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
         if (received_message['type'] == 'channel_joined'):
-            print '\033[91m I JOINED A CHANNEL \033[0m'
             try:
+                print '\033[91m I JOINED A CHANNEL \033[0m'
                 chan = received_message['channel']['id']
-                req = rtm_open_channel()
+                req = rtm_open_channel(chan)
                 params = {
                   'channel' : chan,
                   'token' : TOKEN,
