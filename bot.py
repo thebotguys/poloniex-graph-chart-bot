@@ -15,30 +15,48 @@ TOKEN = os.environ['SLACK-TOKEN']
 ###############################################################
 
 def parse_join(message):
-    m = json.loads(message)
-    print '\033[91m' + str(m) + '\033[0m'
-    if (m['type'] == 'channel_joined'):
-        req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel']['id'])
-        req = req.json()
-        chan = m['channel']['id']
-        message = 'Hello to everybody, looks like you need my help in this channel, what can I do for you?'
-        resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
-    elif (m['type'] == 'message') and m['user'] != BOT_ID:
-        try:
-            messageText = m['text']
-            if '@' + BOT_ID in messageText: #message for me
-                if 'help' in messageText:
-                    req = requests.get('https://slack.com/api/im.open?token='+TOKEN+'&channel='+m['channel'])
-                    req = req.json()
-                    chan = m['channel']
-                    message = '[TODO]You can ask me any graph by using @' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME], where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 and COIN2 are coins'
-                    resp = requests.post('https://slack.com/api/chat.postMessage?token='+TOKEN+'&channel='+chan+'&text='+urllib.quote(message)+'&parse=full&as_user=true')
-        except Exception as e:
-            print e
-    elif (m['type'] == 'hello'):
-        print '\033[91m HELLO RECEIVED \033[0m'
-
-    else:pass
+    try:
+        receivedMessage = json.loads(message)
+        #print '\033[91m' + str(m) + '\033[0m'
+        if (receivedMessage['type'] == 'channel_joined'):
+            print '\033[91m I JOINED A CHANNEL \033[0m'
+            chan = receivedMessage['channel']['id']
+            req = rtm_open_channel()
+            params = {
+              'channel' : chan,
+              'token' : TOKEN,
+              'text' : 'Hello to everybody, looks like you need my help \
+                        in this channel, what can I do for you?',
+              'parse' : 'full',
+              'as_user' : 'true'
+            }
+            resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+        elif (receivedMessage['type'] == 'message') and receivedMessage['user'] != BOT_ID:
+            print '\033[91m MESSAGE RECEIVED \033[0m'
+                receivedText = receivedMessage['text']
+                chan = receivedMessage['channel']
+                if '@' + BOT_ID in receivedText: #message for me
+                    #TODO parse message
+                    if 'help' in receivedText:
+                        req = rtm_open_channel(channel=chan)
+                        params = {
+                          'channel' : chan,
+                          'token' : TOKEN,
+                          'text' : urllib.quote('[TODO]You can ask me any graph by using @' + BOT_NAME +
+                                                ' graph [COIN1] [COIN2] [TIME], \
+                                                where TIME is 24h, 7d, 30d, 1y. And of course sir. COIN1 \
+                                                and COIN2 are coins'),
+                          'parse' : 'full',
+                          'as_user' : 'true'
+                        }
+                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        print '\033[91m HELP MESSAGE POSTED \033[0m'
+        elif (receivedMessage['type'] == 'hello'):
+            print '\033[91m HELLO RECEIVED \033[0m'
+        else:pass
+    except Exception as ex:
+        print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
+               Error :' + ex + ' \033[0m'
 #    {
 #'text' : 'Here's your graph, sir.',
 #    'attachments': [
@@ -55,6 +73,15 @@ def start_rtm():
     r = requests.get('https://slack.com/api/rtm.start?token='+TOKEN, verify=False)
     r = r.json()
     r = r['url']
+    return r
+
+def rtm_open_channel(channel):
+    params = {
+       'token' : TOKEN,
+       'channel' : channel,
+    }
+    req = requests.get('https://slack.com/api/im.open', params=params)
+    req = req.json()
     return r
 
 def on_message(ws, message):
