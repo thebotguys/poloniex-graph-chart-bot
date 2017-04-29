@@ -85,7 +85,7 @@ def parse_join(message):
                                         resp = resp.json()
                                         #print '\033[91m ' + str(resp) + ' \033[0m'
                                         response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
-                                        response_text += '\nCurrent Volume of the last 24 hours is ' + resp['ticker']['volume'] + ' ' + coin1.upper()
+                                        response_text += '\nCurrent Volume of the last 24 hours is ' + resp['ticker']['volume'] + ' ' + coin1.upper() + '(' + str(float(resp['ticker']['price']) * float(resp['ticker']['volume'])) + ' ' + coin2.upper() + ')'
                                     else:
                                         response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
                                     title = coin1.upper() + ' - ' + coin2.upper() + ' '
