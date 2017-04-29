@@ -37,12 +37,23 @@ def parse_join(message):
             chan = receivedMessage['channel']
             if '@' + BOT_ID in receivedText: #message for me
                 #TODO parse message
+                if 'thank you' in receivedText:
+                    req = rtm_open_channel(channel=chan)
+                    params = {
+                      'channel' : chan,
+                      'token' : TOKEN,
+                      'text' : 'My pleasure, sir. :). At your service.',
+                      'parse' : 'full',
+                      'as_user' : 'true'
+                    }
+                    resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                    print '\033[91m THANK YOU MESSAGE POSTED \033[0m'
                 if 'help' in receivedText:
                     req = rtm_open_channel(channel=chan)
                     params = {
                       'channel' : chan,
                       'token' : TOKEN,
-                      'text' : '[TODO]You can ask me any graph by using \n '+
+                      'text' : 'You can ask me any graph by using \n '+
                                '`@' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME]`\n'+
                                'where `TIME` is 24h, 7d, 30d, 1y. \n' +
                                'And of course sir. `COIN1` and `COIN2` are coins\n' +
@@ -108,7 +119,18 @@ def parse_join(message):
                         print ex
         elif(receivedMessage['type'] == 'hello'):
             print '\033[91m HELLO RECEIVED \033[0m'
-        else:pass
+        else:
+            req = rtm_open_channel(channel=chan)
+            params = {
+              'channel' : chan,
+              'token' : TOKEN,
+              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n' +
+                       '`@' + BOT_NAME + ' help`',
+              'parse' : 'full',
+              'as_user' : 'true'
+            }
+            resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+            print '\033[91m THANK YOU MESSAGE POSTED \033[0m'
     except Exception as ex:
         print '\033[91m Exception : Message => ' + str(receivedMessage) + '\n \
                Error :' + ex + ' \033[0m'
