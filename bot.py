@@ -124,8 +124,7 @@ def parse_join(message):
             params = {
               'channel' : chan,
               'token' : TOKEN,
-              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n' +
-                       '`@' + BOT_NAME + ' help`',
+              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n `@' + BOT_NAME + ' help`',
               'parse' : 'full',
               'as_user' : 'true'
             }
