@@ -87,15 +87,17 @@ def parse_join(message):
                                     if resp.status_code == requests.codes.ok:
                                         resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
                                         respJson = resp.json()
-                                        if resp.status_code == requests.codes.ok and respJson['success'] == 'true':
+                                        if resp.status_code == requests.codes.ok:
+                                            if respJson['success'] == 'true':
                                                 #print '\033[91m ' + str(resp) + ' \033[0m'
                                                 response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + respJson['ticker']['price'] + ' ' + coin2.upper()
                                                 response_text += '\nCurrent Volume of the last 24 hours is ' + respJson['ticker']['volume'] + ' ' + coin1.upper()
                                                 response_text += ' (which equals to ' + str(float(respJson['ticker']['price']) * float(respJson['ticker']['volume'])) + ' ' + coin2.upper() + ')'
+                                            else:
+                                                print '\033[91m ' + respJson['error'] + ' \033[0m'
+                                                response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
                                         else:
                                             response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
-                                        if respJson['success'] == 'false':
-                                            print '\033[91m ' + respJson['error'] + ' \033[0m'
                                         title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                         if timeframe == '24h':
                                             title += '24 Hours'
