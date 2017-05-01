@@ -86,21 +86,22 @@ def parse_join(message):
                                     resp = requests.get(url)
                                     if resp.status_code == requests.codes.ok:
                                         resp = requests.get('https://api.cryptonator.com/api/ticker/' + coin1 + '-' + coin2)
-                                        if(resp.status_code == requests.codes.ok):
-                                            resp = resp.json()
-                                            #print '\033[91m ' + str(resp) + ' \033[0m'
-                                            response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
-                                            response_text += '\nCurrent Volume of the last 24 hours is ' + resp['ticker']['volume'] + ' ' + coin1.upper() + '(' + str(float(resp['ticker']['price']) * float(resp['ticker']['volume'])) + ' ' + coin2.upper() + ')'
+                                        resp = resp.json()
+                                        if resp.status_code == requests.codes.ok and resp['success'] == 'true':
+                                                #print '\033[91m ' + str(resp) + ' \033[0m'
+                                                response_text =  '\nThe current price of ' + coin1.upper() + ' is ' + resp['ticker']['price'] + ' ' + coin2.upper()
+                                                response_text += '\nCurrent Volume of the last 24 hours is ' + resp['ticker']['volume'] + ' ' + coin1.upper()
+                                                response_text += ' (which equals to ' + str(float(resp['ticker']['price']) * float(resp['ticker']['volume'])) + ' ' + coin2.upper() + ')'
                                         else:
                                             response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
                                         title = coin1.upper() + ' - ' + coin2.upper() + ' '
-                                        if (timeframe == '24h'):
+                                        if timeframe == '24h':
                                             title += '24 Hours'
-                                        elif (timeframe == '7d'):
+                                        elif timeframe == '7d':
                                             title += '7 Days'
-                                        elif (timeframe == '30d'):
+                                        elif timeframe == '30d':
                                             title += '30 Days'
-                                        elif (timeframe == '7d'):
+                                        elif timeframe == '7d':
                                             title += '1 Year'
                                         else:
                                             title += 'Invalid Timeframe [please contact my developer to fix this]'
