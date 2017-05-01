@@ -35,7 +35,7 @@ def parse_join(message):
             #except Exception as ex:
             #    print ex
         elif (received_message['type'] == 'message') and received_message['user'] != BOT_ID:
-            #try:
+            try:
                 print '\033[91m MESSAGE RECEIVED \033[0m'
                 received_text = received_message['text']
                 chan = received_message['channel']
@@ -127,8 +127,8 @@ def parse_join(message):
                             else:
                               params['text'] = 'Sorry sir. it seems that you want a graph but you don\'t provide me enough info.\n Check `@' + BOT_NAME + ' help` for info'
                               resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                        #except Exception as ex:
-                            #print ex
+                        except Exception as ex:
+                            print ex
                     elif 'thank you' in received_text or 'thanks' in received_text:
                         #try:
                             req = rtm_open_channel(channel=chan)
