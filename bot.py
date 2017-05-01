@@ -61,7 +61,7 @@ def parse_join(message):
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                         print '\033[91m HELP MESSAGE POSTED \033[0m'
                     elif 'graph' in received_text:
-                        #try:
+                        try:
                             message_args = received_text.split(' ')
                             params = {
                               'channel' : chan,
