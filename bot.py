@@ -19,8 +19,8 @@ def parse_join(message):
     #try:
         received_message = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
-        if (received_message['type'] == 'channel_joined'):
-            #try:
+        if received_message['type'] == 'channel_joined':
+            try:
                 print '\033[91m I JOINED A CHANNEL \033[0m'
                 chan = received_message['channel']['id']
                 req = rtm_open_channel(channel=chan)
@@ -32,9 +32,9 @@ def parse_join(message):
                   'as_user' : 'true'
                 }
                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-            #except Exception as ex:
-            #    print ex
-        elif (received_message['type'] == 'message') and received_message['user'] != BOT_ID:
+            except Exception as ex:
+                print ex
+        elif received_message['type'] == 'message' and received_message['user'] != BOT_ID:
             try:
                 print '\033[91m MESSAGE RECEIVED \033[0m'
                 received_text = received_message['text']
@@ -80,8 +80,7 @@ def parse_join(message):
                                     response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.'
                                     response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
                                 else: #tries to get image
-                                  #try:
-                                    #building url
+                                  try:
                                     url = 'https://cryptohistory.org/charts/candlestick/'
                                     url += coin1 + '-' + coin2 + '/' + timeframe + '/png'
                                     resp = requests.get(url)
@@ -122,15 +121,15 @@ def parse_join(message):
                                         response_text += 'Please have in mind that I get data from Poloniex archives.'
                                         params['text'] = response_text
                                     resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
-                                  #except Exception as ex:
-                                    #  print ex
+                                  except Exception as ex:
+                                    print ex
                             else:
                               params['text'] = 'Sorry sir. it seems that you want a graph but you don\'t provide me enough info.\n Check `@' + BOT_NAME + ' help` for info'
                               resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                         except Exception as ex:
                             print ex
                     elif 'thank you' in received_text or 'thanks' in received_text:
-                        #try:
+                        try:
                             req = rtm_open_channel(channel=chan)
                             params = {
                               'channel' : chan,
@@ -141,10 +140,10 @@ def parse_join(message):
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                             print '\033[91m YOU\'RE WELCOME MESSAGE POSTED \033[0m'
-                        #except Exception as ex:
-                        #    print ex
+                        except Exception as ex:
+                            print ex
                     else:
-                        #try:
+                        try:
                             req = rtm_open_channel(channel=chan)
                             params = {
                               'channel' : chan,
@@ -155,11 +154,11 @@ def parse_join(message):
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                             print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
-                        #except Exception as ex:
-                        #    print ex
-            #except Exception as ex:
-            #    print ex
-        elif(received_message['type'] == 'hello'):
+                        except Exception as ex:
+                            print ex
+            except Exception as ex:
+                print ex
+        elif received_message['type'] == 'hello':
             print '\033[91m HELLO RECEIVED \033[0m'
         else: pass
     #except Exception as ex:
