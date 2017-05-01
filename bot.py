@@ -94,6 +94,8 @@ def parse_join(message):
                                                 response_text += ' (which equals to ' + str(float(respJson['ticker']['price']) * float(respJson['ticker']['volume'])) + ' ' + coin2.upper() + ')'
                                         else:
                                             response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
+                                        if respJson['success'] == 'false':
+                                            print '\033[91m ' + respJson['error'] + ' \033[0m'
                                         title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                         if timeframe == '24h':
                                             title += '24 Hours'
