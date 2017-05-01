@@ -16,7 +16,7 @@ TOKEN = os.environ['SLACK-TOKEN']
 
 def parse_join(message):
         """Parses a received message and does actions based on the type of the message."""
-    #try:
+    try:
         received_message = json.loads(message)
         #print '\033[91m' + str(m) + '\033[0m'
         if received_message['type'] == 'channel_joined':
@@ -161,8 +161,8 @@ def parse_join(message):
         elif received_message['type'] == 'hello':
             print '\033[91m HELLO RECEIVED \033[0m'
         else: pass
-    #except Exception as ex:
-    #    print '\033[91m Exception : Message => ' + str(received_message) + '\n Error :' + ex + ' \033[0m'
+    except Exception as ex:
+        print ex
 
 def start_rtm():
     """Connects to Slacks and initiates socket handshake, returns a websocket"""
