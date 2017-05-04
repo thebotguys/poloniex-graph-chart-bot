@@ -65,7 +65,7 @@ def parse_join(message):
                         }
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                         print '\033[91m YOLO MODE ACTIVATED \033[0m'
-                    elif 'turn normal' in received_message.lower():
+                    elif 'turn normal' in received_text.lower():
                         yolo_mode = False
                         req = rtm_open_channel(channel=chan)
                         params = {
