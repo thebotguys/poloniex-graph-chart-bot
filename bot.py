@@ -47,7 +47,7 @@ def parse_join(message):
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
-                          'text' : 'Greetings, sir. \n ' if yolo_mode else 'HI THERE' +
+                          'text' : 'Greetings, sir. \n ' if yolo_mode else 'HI THERE',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
