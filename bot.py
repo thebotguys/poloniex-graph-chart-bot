@@ -48,7 +48,7 @@ def parse_join(message):
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
-                          'text' : 'Greetings, sir. \n ' if yolo_mode else 'HI THERE',
+                          'text' : 'Greetings, sir. \n ' if not yolo_mode else 'HI THERE',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
@@ -93,7 +93,7 @@ def parse_join(message):
                                    'Support my creator : Pay his pizzas and coffee\n' +
                                    '@h4cky_f3v3r\n' +
                                    #'*Paypal :* https://paypal.me/AlessandroSanino \n' +
-                                   '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3' if yolo_mode else 'FUCK OFF',
+                                   '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3' if not yolo_mode else 'FUCK OFF',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
@@ -116,8 +116,8 @@ def parse_join(message):
                                 timeframe = message_args[4].lower()
 
                                 if not timeframe in ['24h', '7d', '30d', '1y']:
-                                    response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.' if yolo_mode else 'DAFUQ?\n'
-                                    response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`' if yolo_mode else '4 NOOBZ : `@' + BOT_NAME + ' help`'
+                                    response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.' if not yolo_mode else 'DAFUQ?\n'
+                                    response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`' if not yolo_mode else '4 NOOBZ : `@' + BOT_NAME + ' help`'
                                 else: #tries to get image
                                   try:
                                     url = 'https://cryptohistory.org/charts/candlestick/'
