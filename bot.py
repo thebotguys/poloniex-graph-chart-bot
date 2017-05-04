@@ -18,7 +18,7 @@ def parse_join(message):
     try:
         """Parses a received message and does actions based on the type of the message."""
         received_message = json.loads(message)
-        #print '\033[91m' + str(m) + '\033[0m'
+        print '\033[91m' + str(m) + '\033[0m'
         if received_message['type'] == 'channel_joined':
             try:
                 print '\033[91m I JOINED A CHANNEL \033[0m'
