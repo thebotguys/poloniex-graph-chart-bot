@@ -14,6 +14,8 @@ BOT_NAME = os.environ['BOT-NAME']
 TOKEN = os.environ['SLACK-TOKEN']
 ###############################################################
 
+yolo_mode = False
+
 def parse_join(message):
     try:
         """Parses a received message and does actions based on the type of the message."""
@@ -40,7 +42,42 @@ def parse_join(message):
                 received_text = received_message['text']
                 chan = received_message['channel']
                 if '@' + BOT_ID in received_text: #message for me
-                    if 'help' in received_text:
+                    if 'hi' in received_text.lower() or 'hello' in received_text.lower():
+                        req = rtm_open_channel(channel=chan)
+                        params = {
+                          'channel' : chan,
+                          'token' : TOKEN,
+                          'text' : 'Greetings, sir. \n ' if yolo_mode else 'HI THERE' +
+                          'parse' : 'full',
+                          'as_user' : 'true'
+                        }
+                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        print '\033[91m HI POSTED \033[0m'
+                    if 'turn yolo' in received_text.lower():
+                        yolo_mode = True
+                        req = rtm_open_channel(channel=chan)
+                        params = {
+                          'channel' : chan,
+                          'token' : TOKEN,
+                          'text' : 'NP \n ',
+                          'parse' : 'full',
+                          'as_user' : 'true'
+                        }
+                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        print '\033[91m YOLO MODE ACTIVATED \033[0m'
+                    elif 'turn normal' in received_message.lower():
+                        yolo_mode = False
+                        req = rtm_open_channel(channel=chan)
+                        params = {
+                          'channel' : chan,
+                          'token' : TOKEN,
+                          'text' : 'What did just happen sir.? \n ',
+                          'parse' : 'full',
+                          'as_user' : 'true'
+                        }
+                        resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        print '\033[91m YOLO MODE DECTIVATED \033[0m'
+                    elif 'help' in received_text:
                         req = rtm_open_channel(channel=chan)
                         params = {
                           'channel' : chan,
@@ -55,7 +92,7 @@ def parse_join(message):
                                    'Support my creator : Pay his pizzas and coffee\n' +
                                    '@h4cky_f3v3r\n' +
                                    #'*Paypal :* https://paypal.me/AlessandroSanino \n' +
-                                   '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3',
+                                   '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3' if yolo_mode else 'FUCK OFF',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
@@ -78,8 +115,8 @@ def parse_join(message):
                                 timeframe = message_args[4].lower()
 
                                 if not timeframe in ['24h', '7d', '30d', '1y']:
-                                    response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.'
-                                    response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`'
+                                    response_text = 'Invalid time frame sir. , the available options are : [24h, 7d, 30d, 1y]\n.' if yolo_mode else 'DAFUQ?\n'
+                                    response_text += 'Please ask me more by typing `@' + BOT_NAME + ' help`' if yolo_mode else '4 NOOBZ : `@' + BOT_NAME + ' help`'
                                 else: #tries to get image
                                   try:
                                     url = 'https://cryptohistory.org/charts/candlestick/'
@@ -96,9 +133,9 @@ def parse_join(message):
                                                 response_text += ' (which equals to ' + str(float(respJson['ticker']['price']) * float(respJson['ticker']['volume'])) + ' ' + coin2.upper() + ')'
                                             else:
                                                 print '\033[91m ' + respJson['error'] + ' \033[0m'
-                                                response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
+                                                response_text = 'Current Price and Volume are not available, but I have the graph, sir.' if not yolo_mode else "INCOMIIIIINGGGG"
                                         else:
-                                            response_text = 'Current Price and Volume are not available, but I have the graph, sir.'
+                                            response_text = 'Current Price and Volume are not available, but I have the graph, sir.' if not yolo_mode else "INCOMIIIIINGGGG"
                                         title = coin1.upper() + ' - ' + coin2.upper() + ' '
                                         if timeframe == '24h':
                                             title += '24 Hours'
@@ -109,7 +146,7 @@ def parse_join(message):
                                         elif timeframe == '7d':
                                             title += '1 Year'
                                         else:
-                                            title += 'Invalid Timeframe [please contact my developer to fix this]'
+                                            title += 'Invalid Timeframe [please contact my developer to fix this]' if not yolo_mode else "DAFUQ?"
                                         title += ' graph'
                                         params['attachments'] = json.dumps([
                                             {
@@ -125,12 +162,12 @@ def parse_join(message):
                                     else:
                                         response_text = 'Excuse me sir, but I can\'t find the coin pair you are asking for.\n'
                                         response_text += 'Please have in mind that I get data from Poloniex archives.'
-                                        params['text'] = response_text
+                                        params['text'] = response_text if not yolo_mode else "WTF? PLZ GOOD COINZ"
                                     resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                                   except Exception as ex:
                                     print ex
                             else:
-                              params['text'] = 'Sorry sir. it seems that you want a graph but you don\'t provide me enough info.\n Check `@' + BOT_NAME + ' help` for info'
+                              params['text'] = 'Sorry sir. it seems that you want a graph but you don\'t provide me enough info.\n Check `@' + BOT_NAME + ' help` for info' if not yolo_mode else '4 NOOBZ: `@' + BOT_NAME + ' help`'
                               resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
                         except Exception as ex:
                             print ex
@@ -140,7 +177,7 @@ def parse_join(message):
                             params = {
                               'channel' : chan,
                               'token' : TOKEN,
-                              'text' : 'You\'re welcome sir. It\'s a pleasure to me to be helpful. :)',
+                              'text' : 'You\'re welcome sir. It\'s a pleasure to me to be helpful. :)' if not yolo_mode else 'GG',
                               'parse' : 'full',
                               'as_user' : 'true'
                             }
@@ -154,7 +191,7 @@ def parse_join(message):
                             params = {
                               'channel' : chan,
                               'token' : TOKEN,
-                              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n `@' + BOT_NAME + ' help`',
+                              'text' : 'Excuse me sir., but I don\'t understand what you are saying. May you ask me for help?\n `@' + BOT_NAME + ' help`' if not yolo_mode else '4 NOOBZ: `@' + BOT_NAME + ' help`',
                               'parse' : 'full',
                               'as_user' : 'true'
                             }
