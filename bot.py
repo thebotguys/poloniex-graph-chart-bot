@@ -17,6 +17,7 @@ TOKEN = os.environ['SLACK-TOKEN']
 yolo_mode = False
 
 def parse_join(message):
+    global yolo_mode
     try:
         """Parses a received message and does actions based on the type of the message."""
         received_message = json.loads(message)
