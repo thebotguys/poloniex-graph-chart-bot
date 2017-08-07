@@ -18,6 +18,13 @@ Deploy with a click supported now
 
 Don't forget to scale your worker to 1.
 
-If you want to donate and support my work:<br>
-BTC : 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3<br>
-Paypal : https://paypal.me/AlessandroSanino
+# Donate
+Feel free to donate to support my work:
+
+| METHOD 	| ADDRESS                                   	|
+|--------	|--------------------------------------------	|
+| Paypal 	| https://paypal.me/AlessandroSanino         	|
+| BTC    	| 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3         	|
+| XVG    	| DFstPiWFXjX8UCyUCxfeVpk6JkgaLBSNvS         	|
+| ETH    	| 0x2fe7bd8a41e91e9284aada0055dbb15ecececf02 	|
+| USDT   	| 18obCEVmbT6MHXDcPoFwnUuCmkttLbK5Xo         	|
