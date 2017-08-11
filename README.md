@@ -11,7 +11,7 @@ Link to it's repository : https://github.com/orliesaurus/greetingslack. Again, t
 Python 2.7+
 Edit `bot.py` on lines 7-8 to customise with your greeting and token
 
-#Heroku
+## Heroku
 Deploy with a click supported now
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
@@ -23,7 +23,6 @@ Feel free to donate to support my work:
 
 | METHOD 	| ADDRESS                                   	|
 |--------	|--------------------------------------------	|
-| Paypal 	| https://paypal.me/AlessandroSanino         	|
 | BTC    	| 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3         	|
 | XVG    	| DFstPiWFXjX8UCyUCxfeVpk6JkgaLBSNvS         	|
 | ETH    	| 0x2fe7bd8a41e91e9284aada0055dbb15ecececf02 	|
