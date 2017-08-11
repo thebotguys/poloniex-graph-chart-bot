@@ -9,9 +9,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 ###VARIABLES THAT YOU NEED TO SET MANUALLY IF NOT ON HEROKU#####
-BOT_ID = os.environ['BOT-ID']
-BOT_NAME = os.environ['BOT-NAME']
-TOKEN = os.environ['SLACK-TOKEN']
+BOT_ID = os.environ['BOT_ID']
+BOT_NAME = os.environ['BOT_NAME']
+TOKEN = os.environ['SLACK_TOKEN']
 ###############################################################
 
 yolo_mode = False
