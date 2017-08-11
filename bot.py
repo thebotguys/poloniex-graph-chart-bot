@@ -13,7 +13,7 @@ BOT_ID = os.environ['BOT_ID']
 BOT_NAME = os.environ['BOT_NAME']
 TOKEN = os.environ['SLACK_TOKEN']
 ###############################################################
-
+# print 'BOT_ID=%s\nBOT_NAME=%s\nSLACK_TOKEN=%s' % (BOT_ID, BOT_NAME, TOKEN)
 yolo_mode = False
 
 def parse_join(message):
@@ -26,25 +26,25 @@ def parse_join(message):
             try:
                 print '\033[91m I JOINED A CHANNEL \033[0m'
                 chan = received_message['channel']['id']
-                req = rtm_open_channel(channel=chan)
                 params = {
                   'channel' : chan,
                   'token' : TOKEN,
-                  'text' : 'Hello to everybody, looks like you need my help in this channel, what can I do for you?',
+                  'text' : 'Hello to everybody, looks like you need my help in this channel, what can I do for you? type `@' + BOT_NAME + " help`",
                   'parse' : 'full',
                   'as_user' : 'true'
                 }
                 resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                # print resp.json()
             except Exception as ex:
                 print ex
         elif received_message['type'] == 'message' and received_message['user'] != BOT_ID:
             try:
                 print '\033[91m MESSAGE RECEIVED \033[0m'
+                print '\033[91m %s \033[0m' % str(received_message)
                 received_text = received_message['text']
                 chan = received_message['channel']
                 if '@' + BOT_ID in received_text: #message for me
                     if 'hi' in received_text.lower() or 'hello' in received_text.lower():
-                        req = rtm_open_channel(channel=chan)
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
@@ -53,10 +53,10 @@ def parse_join(message):
                           'as_user' : 'true'
                         }
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        # print resp.json()
                         print '\033[91m HI POSTED \033[0m'
                     if 'turn yolo' in received_text.lower():
                         yolo_mode = True
-                        req = rtm_open_channel(channel=chan)
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
@@ -65,10 +65,10 @@ def parse_join(message):
                           'as_user' : 'true'
                         }
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        # print resp.json()                        
                         print '\033[91m YOLO MODE ACTIVATED \033[0m'
                     elif 'turn normal' in received_text.lower():
                         yolo_mode = False
-                        req = rtm_open_channel(channel=chan)
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
@@ -77,9 +77,9 @@ def parse_join(message):
                           'as_user' : 'true'
                         }
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        # print resp.json()
                         print '\033[91m YOLO MODE DECTIVATED \033[0m'
                     elif 'help' in received_text:
-                        req = rtm_open_channel(channel=chan)
                         params = {
                           'channel' : chan,
                           'token' : TOKEN,
@@ -87,17 +87,18 @@ def parse_join(message):
                                    '`@' + BOT_NAME + ' graph [COIN1] [COIN2] [TIME]`\n'+
                                    'where `TIME` is 24h, 7d, 30d, 1y. \n' +
                                    'And of course sir. `COIN1` and `COIN2` are coins\n' +
-                                   'Example of call may be `@' + BOT_NAME + ' graph ARK USD 24h` \n' +
+                                   'Example of call may be `@' + BOT_NAME + ' graph ETH BTC 24h` \n' +
                                    '_Sources from : Cryptonator, Cryptohistory (Graphs) and Poloniex_\n' +
                                    #'*Project Repository on Github.com :* https://github.com/AlessandroSanino1994/cryptocharts-slack-bot \n' +
                                    'Support my creator : Pay his pizzas and coffee\n' +
-                                   '@h4cky_f3v3r\n' +
+                                   '@thebotguy\n' +
                                    #'*Paypal :* https://paypal.me/AlessandroSanino \n' +
                                    '*Bitcoin :* 1DVgmv6jkUiGrnuEv1swdGRyhQsZjX9MT3' if not yolo_mode else 'FUCK OFF',
                           'parse' : 'full',
                           'as_user' : 'true'
                         }
                         resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                        # print resp.json()
                         print '\033[91m HELP MESSAGE POSTED \033[0m'
                     elif 'graph' in received_text:
                         try:
@@ -165,11 +166,13 @@ def parse_join(message):
                                         response_text += 'Please have in mind that I get data from Poloniex archives.'
                                         params['text'] = response_text if not yolo_mode else "WTF? PLZ GOOD COINZ"
                                     resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                                    # print resp.json()
                                   except Exception as ex:
                                     print ex
                             else:
                               params['text'] = 'Sorry sir. it seems that you want a graph but you don\'t provide me enough info.\n Check `@' + BOT_NAME + ' help` for info' if not yolo_mode else '4 NOOBZ: `@' + BOT_NAME + ' help`'
                               resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                              # print resp.json()
                         except Exception as ex:
                             print ex
                     elif 'thank you' in received_text or 'thanks' in received_text:
@@ -183,6 +186,7 @@ def parse_join(message):
                               'as_user' : 'true'
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                            # print resp.json()
                             print '\033[91m YOU\'RE WELCOME MESSAGE POSTED \033[0m'
                         except Exception as ex:
                             print ex
@@ -197,6 +201,7 @@ def parse_join(message):
                               'as_user' : 'true'
                             }
                             resp = requests.post('https://slack.com/api/chat.postMessage', params=params)
+                            # print resp.json()
                             print '\033[91m I DON\'T UNDERSTAND MESSAGE POSTED \033[0m'
                         except Exception as ex:
                             print ex
@@ -238,7 +243,9 @@ def on_open(ws):
     print 'Connection Started'
 
 if __name__ == '__main__':
+    print 'connecting...'
     r = start_rtm()
     ws = websocket.WebSocketApp(r, on_message = on_message, on_error = on_error, on_close = on_close)
     #ws.on_open
+    print 'connected'
     ws.run_forever()
